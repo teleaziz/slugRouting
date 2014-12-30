@@ -40,8 +40,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var article = req.article;
 
-	article.title = req.body.title;
-	article.content = req.body.content;
+	article = _.extend(article , req.body);
 
 	article.save(function(err) {
 		if (err) {
@@ -96,4 +95,17 @@ exports.articleByID = function(req, res, next, id) {
 		req.article = article;
 		next();
 	});
+};
+
+exports.readBySlug = function(req , res){
+  Article.findOne(req.query).populate('user', 'displayName').exec(function(err, article) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(article);
+		}
+	});
+
 };

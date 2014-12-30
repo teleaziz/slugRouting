@@ -19,11 +19,11 @@ angular.module('articles').config(['$stateProvider',
 			templateUrl: 'modules/articles/views/create-article.client.view.html'
 		}).
 		state('articles.view', {
-			url: '/:articleId',
+			url: '/:articleSlug',
 			templateUrl: 'modules/articles/views/view-article.client.view.html'
 		}).
 		state('articles.edit', {
-			url: '/:articleId/edit',
+			url: '/:articleSlug/edit',
 			templateUrl: 'modules/articles/views/edit-article.client.view.html'
 		});
 	}
